@@ -1,6 +1,6 @@
 import java.util.Scanner;
 public class StepTracker extends Converter {
-    int[][] year = new int[12][30];
+    int[][] year = new int[12][31];
     Converter converter = new Converter();
     int stepsGoal = 10000;
 
@@ -28,7 +28,7 @@ public class StepTracker extends Converter {
             System.out.println("Нельзя пройти отрицательное число шагов! Начните заново!");
             return;
         }
-        year[month - 1][day - 1] = stepsCunt;
+        year[month - 1][day-1] = stepsCunt;
     }
 
     //метод статистики за месяц
@@ -42,22 +42,22 @@ public class StepTracker extends Converter {
             return;
         }
         int day = 1;
-        for (int i = 1; i <= year[month].length; i++) {
-            System.out.print(i + " день: " + +year[month - 1][day - 1] + " шагов,");
+        for (int i = 1; i < year[month-1].length; i++) {
+            System.out.print(i + " день: " + +year[month - 1][day-1] + " шагов,");
             day = day + 1;
         }
         System.out.println(" ");
 
         //в этой части кода узнаем общую сумму шагов за месяц
         int totalCount = 0;
-        for (int j = 0; j < year[month].length; j++) {
+        for (int j = 0; j < year[month-1].length; j++) {
             totalCount = totalCount + year[month - 1][j];
         }
         System.out.println("Общее количество шагов за месяц: " + totalCount);
 
         //в этой части кода выводим максимальное количество шагов за месяц
         int maxSteps = 0;
-        for (int k = 0; k < year[month].length; k++) {
+        for (int k = 0; k < year[month-1].length; k++) {
             if (maxSteps < year[month - 1][k]) {
                 maxSteps = year[month - 1][k];
             }
@@ -65,7 +65,7 @@ public class StepTracker extends Converter {
         System.out.println("Максимальное количество шагов за месяц: " + maxSteps);
 
         //в этой части кода выводим среднее количество шагов
-        System.out.println("Среднее количество шагов за месяц в день: " + totalCount / day);
+        System.out.println("Среднее количество шагов за месяц в день: " + totalCount / 30);
 
         //В этой части кода выводим расстояние в Км
         converter.countKm(totalCount);
